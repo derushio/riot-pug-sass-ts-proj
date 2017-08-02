@@ -25,7 +25,7 @@ const exec = (command, display) => {
 }
 
 // クリーンビルド
-exec('rm -rf ./dist/*; rm -rf ./dist/.*').then(() => {
+exec('find ./dist -maxdepth 1 -print | grep -E "./dist/.+" | xargs -I{} rm -rf {}').then(() => {
     // リソースコピー
     return exec('rsync -a ./src/ ./dist/ --exclude "/script/" --exclude "/style/" --exclude "*.pug"', true).then(() => {
         console.log("-------------------- resource copy done --------------------")

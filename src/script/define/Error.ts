@@ -1,10 +1,19 @@
+function ExtendableBuiltin(ec: typeof Error): typeof Error {
+    function ExtendableBuiltin() {
+        ec.apply(this, arguments)
+    }
+    ExtendableBuiltin.prototype = Object.create(ec.prototype)
+    Object.setPrototypeOf(ExtendableBuiltin, ec)
+
+    return (<typeof Error>ExtendableBuiltin)
+}
 
 /**
  * @param {String} message メッセージ
  * @param {Object} extra 付随する情報
  * @param {Array} extrakeys 付随する情報のエントリ
  */
-export default class CommonError extends Error {
+export default class CommonError extends ExtendableBuiltin(Error) {
     public extra: any
 
     constructor(message, extra) {

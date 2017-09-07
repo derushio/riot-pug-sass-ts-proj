@@ -1,5 +1,6 @@
-export declare function require(name: string): any
-const riot = require("riot")
+declare function require(name: string): any
+
+import riot from "riot"
 const test = require("../tag/test.tag")
 
 riot.mount("*")

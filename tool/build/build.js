@@ -55,7 +55,7 @@ exec('dir=./dist; [ ! -e $dir ] && mkdir $dir; find ./dist -maxdepth 1 -print | 
         // sass warning
     })
 }).then(() => {
-    return exec('rm -rf src/script-es6')
+    return exec('rm -rf src/script-es5')
 }).then(() => {
     console.log("-------------------- build success --------------------")
     return

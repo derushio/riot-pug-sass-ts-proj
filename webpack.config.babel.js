@@ -2,7 +2,7 @@ import path from 'path'
 import webpack from 'webpack'
 
 export default {
-    context: path.join(__dirname, "./src/script-es6/entry"),
+    context: path.join(__dirname, "./src/script-es5/entry"),
     entry: {
         "index": "./index.js",
         // ここにエントリポイントを増やしてください

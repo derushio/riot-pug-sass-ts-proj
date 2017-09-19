@@ -27,7 +27,7 @@ async function exec (command, display) {
 async function build() {
     try {
         // クリーンビルド
-        await exec('dir=./dist; [ -e $dir ] && rm -rf $dir; mkdir $dir')
+        await exec('dir=./dist; [ ! -e $dir ] && mkdir $dir; find ./dist -maxdepth 1 -print | grep -E "./dist/.+" | xargs -I{} rm -rf {}')
         await exec('dir=./tmp; [ -e $dir ] && rm -rf $dir; mkdir $dir')
         await exec('dir=./tmp/script-ts; [ -e $dir ] && rm -rf $dir; mkdir $dir')
         await exec('dir=./tmp/script-es5; [ -e $dir ] && rm -rf $dir; mkdir $dir')

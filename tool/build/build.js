@@ -29,7 +29,7 @@ async function build() {
         // クリーンビルド
         await exec('dir=./dist; [ ! -e $dir ] && mkdir $dir; find ./dist -maxdepth 1 -print | grep -E "./dist/.+" | xargs -I{} rm -rf {}')
         await exec('dir=./tmp; [ -e $dir ] && rm -rf $dir; mkdir $dir')
-        await exec('dir=./tmp/script-ts; [ -e $dir ] && rm -rf $dir; mkdir $dir')
+        await exec('dir=./tmp/script; [ -e $dir ] && rm -rf $dir; mkdir $dir')
         await exec('dir=./tmp/script-es5; [ -e $dir ] && rm -rf $dir; mkdir $dir')
 
         await Promise.all([
@@ -52,12 +52,12 @@ async function build() {
                         console.log("-------------------- riot done --------------------")
 
                         // riot tag to ts
-                        await exec('find ./tmp/script-ts/ -name "*.js" | while read f; do mv "$f" "${f%.*}.ts"; done')
+                        await exec('find ./tmp/script/ -name "*.js" | while read f; do mv "$f" "${f%.*}.ts"; done')
                         console.log("-------------------- riot tag to ts done --------------------")
                     })(),
                     (async () => {
                         // ts copy
-                        await exec('rsync -a ./src/script/ ./tmp/script-ts/ --exclude "/tag/"')
+                        await exec('rsync -a ./src/script/ ./tmp/script/ --exclude "/tag/"')
                         await exec('cp ./src/tsconfig.json ./tmp/tsconfig.json')
                         console.log("-------------------- ts copy done --------------------")
                     })()

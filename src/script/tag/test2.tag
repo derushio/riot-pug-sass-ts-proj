@@ -1,12 +1,9 @@
-test
-    h1 test
-    test2
+test2
+    h1 test2
     
     script.
         import riot from "riot"
         import CommonError from "../define/Error"
-        
-        require("./test2"); riot.mount("test2")
         
         const str: string = "aiueo"
         console.log(CommonError)

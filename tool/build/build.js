@@ -28,9 +28,9 @@ async function build() {
     try {
         // クリーンビルド
         await exec('dir=./dist; [ -e $dir ] && rm -rf $dir; mkdir $dir')
-        await exec('dir=./src/script-ts; [ -e $dir ] && rm -rf $dir; mkdir $dir')
-        await exec('dir=./src/script-ts; [ -e $dir ] && rm -rf $dir')
-        await exec('dir=./src/script-es5; [ -e $dir ] && rm -rf $dir')
+        await exec('dir=./tmp; [ -e $dir ] && rm -rf $dir; mkdir $dir')
+        await exec('dir=./tmp/script-ts; [ -e $dir ] && rm -rf $dir; mkdir $dir')
+        await exec('dir=./tmp/script-es5; [ -e $dir ] && rm -rf $dir; mkdir $dir')
 
         await Promise.all([
             (async () => {
@@ -52,12 +52,13 @@ async function build() {
                         console.log("-------------------- riot done --------------------")
 
                         // riot tag to ts
-                        await exec('find ./src/script-ts/ -name "*.js" | while read f; do mv "$f" "${f%.*}.ts"; done')
+                        await exec('find ./tmp/script-ts/ -name "*.js" | while read f; do mv "$f" "${f%.*}.ts"; done')
                         console.log("-------------------- riot tag to ts done --------------------")
                     })(),
                     (async () => {
                         // ts copy
-                        await exec('rsync -a ./src/script/ ./src/script-ts/ --exclude "/tag/"')
+                        await exec('rsync -a ./src/script/ ./tmp/script-ts/ --exclude "/tag/"')
+                        await exec('cp ./src/tsconfig.json ./tmp/tsconfig.json')
                         console.log("-------------------- ts copy done --------------------")
                     })()
                 ])
@@ -80,6 +81,10 @@ async function build() {
                 } catch(e) {}
             })()
         ])
+
+        // delete tmp
+        await exec('dir=./tmp; [ -e $dir ] && rm -rf $dir')
+        console.log("-------------------- delete tmp success --------------------")
 
         console.log("-------------------- build success --------------------")
     } catch(e) {

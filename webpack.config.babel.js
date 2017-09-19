@@ -26,19 +26,6 @@ export default {
                         }
                     }
                 ]
-            },
-            {
-                test: /\.js|\.tag$/,
-                enforce: 'post',
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: `es2015-riot`
-                        }
-                    }
-                ]
             }
         ]
     },

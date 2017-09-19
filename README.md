@@ -15,5 +15,4 @@ npm run build
 ```
 
 ## 制限事項
-riotのtagファイルではtsをサポートしません。  
-es6での記述をお願いします。
+riot tag sass内のcalc内変数は `#{$hoge}` ではなく `?{$hoge}` での記述をお願いします

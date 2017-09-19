@@ -5,6 +5,7 @@ export default {
     to: 'src/script-es5/tag',
     ext: 'tag',
     template: 'pug',
+    type: 'ts2',
     style: 'sass2',
     parsers: {
         css: {
@@ -18,8 +19,10 @@ export default {
                 return css2.css.toString('utf-8')
             }
         },
-        "js.ts": (js, opts, url) => {
-            console.log(js)
+        js: {
+            ts2: (js, opts, url) => {
+                return js
+            }
         },
     }
 }

@@ -1,5 +1,12 @@
 test
     h1 test
-    style(type="sass").
+    
+    script.
+        const str: string = "aiueo"
+        
+    style.
+        @import "color.sass"
+        $h1-size: 64px
         h1
-            color: red
+            color: $color-main-theme
+            width: calc(?{$h1-size} + 16px)

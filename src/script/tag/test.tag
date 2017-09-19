@@ -2,7 +2,11 @@ test
     h1 test
     
     script.
+        import riot from "riot"
+        import CommonError from "../define/Error"
+        
         const str: string = "aiueo"
+        console.log(CommonError)
         
     style.
         @import "color.sass"

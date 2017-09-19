@@ -2,7 +2,7 @@ const sass = require("node-sass")
 
 export default {
     from: 'src/script/tag',
-    to: 'src/script-es5/tag',
+    to: 'src/script-ts/tag',
     ext: 'tag',
     template: 'pug',
     type: 'ts2',

@@ -32,42 +32,55 @@ async function build() {
         await exec('dir=./src/script-ts; [ -e $dir ] && rm -rf $dir')
         await exec('dir=./src/script-es5; [ -e $dir ] && rm -rf $dir')
 
-        // リソースコピー
-        await exec('rsync -a ./src/ ./dist/ --exclude "/script/" --exclude "/style/" --exclude "*.pug"', true)
-        console.log("-------------------- resource copy done --------------------")
+        await Promise.all([
+            (async () => {
+                // リソースコピー
+                await exec('rsync -a ./src/ ./dist/ --exclude "/script/" --exclude "/style/" --exclude "*.pug"', true)
+                console.log("-------------------- resource copy done --------------------")
+            })(),
+            (async () => {
+                // pug
+                await exec('npm run build-pug')
+                console.log("-------------------- build pug done --------------------")
+            })(),
+            (async () => {
+                // script
+                await Promise.all([
+                    (async () => {
+                        // riot
+                        await exec('npm run build-riot')
+                        console.log("-------------------- riot done --------------------")
 
-        // riot
-        await exec('npm run build-riot', true)
-        console.log("-------------------- riot done --------------------")
+                        // riot tag to ts
+                        await exec('find ./src/script-ts/ -name "*.js" | while read f; do mv "$f" "${f%.*}.ts"; done')
+                        console.log("-------------------- riot tag to ts done --------------------")
+                    })(),
+                    (async () => {
+                        // ts copy
+                        await exec('rsync -a ./src/script/ ./src/script-ts/ --exclude "/tag/"')
+                        console.log("-------------------- ts copy done --------------------")
+                    })()
+                ])
 
-        await exec('find ./src/script-ts/ -name "*.js" | while read f; do mv "$f" "${f%.*}.ts"; done')
-        console.log("-------------------- riot tag to ts done --------------------")
+                // ts
+                await exec('npm run build-ts')
+                console.log("-------------------- typescript done --------------------")
 
-        // ts copy
-        await exec('rsync -a ./src/script/ ./src/script-ts/ --exclude "/tag/"', true)
-        console.log("-------------------- ts copy done --------------------")
+                // webpack
+                try {
+                    await exec('npm run webpack')
+                    console.log("-------------------- webpack done --------------------")
+                } catch(e) {}
+            })(),
+            (async () => {
+                // sass
+                try {
+                    await exec('npm run build-sass')
+                    console.log("-------------------- build sass done --------------------")
+                } catch(e) {}
+            })()
+        ])
 
-        // ts
-        await exec('npm run build-ts', true)
-        console.log("-------------------- typescript done --------------------")
-
-        // pug
-        await exec('npm run build-pug', true)
-        console.log("-------------------- build pug done --------------------")
-
-        try {
-            // sass
-            await exec('npm run build-sass', true)
-            console.log("-------------------- build sass done --------------------")
-        } catch(e) {}
-
-        try {
-            // webpack
-            await exec('npm run webpack', true)
-            console.log("-------------------- webpack done --------------------")
-        } catch(e) {}
-
-        // await exec('rm -rf src/script-es5')
         console.log("-------------------- build success --------------------")
     } catch(e) {
         console.error("-------------------- build failed --------------------")

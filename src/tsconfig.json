@@ -13,9 +13,6 @@
     "include": [
         "script/**/*.ts"
     ],
-    "files": [
-        "script/dts/Require.d.ts"
-    ],
     "exclude": [
         "node_modules"
     ]

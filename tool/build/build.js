@@ -40,7 +40,7 @@ async function build() {
             })(),
             (async () => {
                 // pug
-                await exec('npm run build-pug')
+                await exec('npm run build-pug', true)
                 console.log("-------------------- build pug done --------------------")
             })(),
             (async () => {
@@ -48,42 +48,42 @@ async function build() {
                 await Promise.all([
                     (async () => {
                         // riot
-                        await exec('npm run build-riot')
+                        await exec('npm run build-riot', true)
                         console.log("-------------------- riot done --------------------")
 
                         // riot tag to ts
-                        await exec('find ./tmp/script/ -name "*.js" | while read f; do mv "$f" "${f%.*}.ts"; done')
+                        await exec('find ./tmp/script/ -name "*.js" | while read f; do mv "$f" "${f%.*}.ts"; done', true)
                         console.log("-------------------- riot tag to ts done --------------------")
                     })(),
                     (async () => {
                         // ts copy
-                        await exec('rsync -a ./src/script/ ./tmp/script/ --exclude "/tag/"')
-                        await exec('cp ./src/tsconfig.json ./tmp/tsconfig.json')
+                        await exec('rsync -a ./src/script/ ./tmp/script/ --exclude "/tag/"', true)
+                        await exec('cp ./src/tsconfig.json ./tmp/tsconfig.json', true)
                         console.log("-------------------- ts copy done --------------------")
                     })()
                 ])
 
                 // ts
-                await exec('npm run build-ts')
+                await exec('npm run build-ts', true)
                 console.log("-------------------- typescript done --------------------")
 
                 // webpack
                 try {
-                    await exec('npm run webpack')
+                    await exec('npm run webpack', true)
                     console.log("-------------------- webpack done --------------------")
                 } catch(e) {}
             })(),
             (async () => {
                 // sass
                 try {
-                    await exec('npm run build-sass')
+                    await exec('npm run build-sass', true)
                     console.log("-------------------- build sass done --------------------")
                 } catch(e) {}
             })()
         ])
 
         // delete tmp
-        await exec('dir=./tmp; [ -e $dir ] && rm -rf $dir')
+        await exec('dir=./tmp; [ -e $dir ] && rm -rf $dir', true)
         console.log("-------------------- delete tmp success --------------------")
 
         console.log("-------------------- build success --------------------")

@@ -1,5 +1,5 @@
 test
-    h1 test
+    h1 { text }
     test2
     
     script.
@@ -8,8 +8,7 @@ test
         
         require("./test2"); riot.mount("test2") // この環境でtag in tagをするための仕組み
         
-        const str: string = "aiueo"
-        console.log(CommonError)
+        this.text = opts.text
         
     style.
         @import "color.sass"

@@ -1,8 +1,8 @@
 const sass = require("node-sass")
 
 export default {
-    from: 'src/script/tag',
-    to: 'tmp/script/tag',
+    from: 'script/tag',
+    to: '../tmp/script/tag',
     ext: 'tag',
     template: 'pug',
     type: 'ts2',
@@ -10,11 +10,11 @@ export default {
     parsers: {
         css: {
             sass2: (tagName, css, opts, url) => {
-                const sassData = css.replace(/\?{(.*?)}/g, "#{$1}").replace(/(^|\n) {4,4}/g, "$1")
+                const sassData = css.replace(/\?{(.*)?}/g, "#{$1}").replace(/(^|\n) {4,4}/g, "$1")
                 const css2 = sass.renderSync({
                     data: sassData,
                     indentedSyntax: true,
-                    includePaths: ["./src/style"]
+                    includePaths: ["./style"]
                 })
                 return css2.css.toString('utf-8')
             }

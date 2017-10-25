@@ -3,7 +3,7 @@
 SUCCESS=0
 FAIL=1
 
-PROJ_NAME="wantalk-web"
+PROJ_NAME="proj"
 SRC_DIR="."
 DIST_DIR="$SRC_DIR/../dist"
 TMP_DIR="$SRC_DIR/../tmp"

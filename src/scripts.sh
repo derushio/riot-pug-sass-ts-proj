@@ -125,7 +125,6 @@ function clean_build() {
 }
 
 function build_typedoc() {
-    cd "$SRC_DIR"
     typedoc --name "$PROJ_NAME" --mode "file" --out "../document/typedoc" "$SRC_DIR"
 }
 

@@ -1,4 +1,4 @@
 import riot from "riot"
-require("../tag/test")
+require("../tag/test/test")
 
 riot.mount("*")

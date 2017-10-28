@@ -1,14 +1,16 @@
 test
     h1 { text }
-    test2
+    inner-test
     
     script.
         import riot from "riot"
-        import CommonError from "../define/Error"
-        
-        require("./test2"); riot.mount("test2") // この環境でtag in tagをするための仕組み
+        require("./inner-test")
         
         this.text = opts.text
+        
+        this.on("update", () => {
+            console.log("test")
+        })
         
     style.
         @import "color.sass"

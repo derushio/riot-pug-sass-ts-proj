@@ -8,10 +8,6 @@ test
         
         this.text = opts.text
         
-        this.on("update", () => {
-            console.log("test")
-        })
-        
     style.
         @import "color.sass"
         $h1-size: 64px

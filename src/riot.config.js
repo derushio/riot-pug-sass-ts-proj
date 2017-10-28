@@ -1,5 +1,10 @@
 const sass = require("node-sass")
 
+/**
+ * sass内のcalcで変数を使うとNaNになる対策
+ * 他のファイルと同じtscでコンパイルするための対策
+ * tag -> jsではなく、tag->tsにコンパイルする
+ */
 export default {
     from: 'script/tag',
     to: '../tmp/script/tag',

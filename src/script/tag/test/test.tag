@@ -1,9 +1,17 @@
 test
+    // pug
     h1 { text }
     inner-test(text="{ innerText }")
     
+    // typescript
+    // dotはpugの定義でその中身の要素をコンパイルしない
     script.
+        /**
+         * TOPレベルtagを用意することにより、optsを受け取りやすくする
+         * 個別のタグにindex.tsからオプションを割り振る事もできる
+         */
         import riot from "riot"
+        // innerタグを読み込む
         require("./inner-test")
         
         // optsからurlのパラメータを受け取り
@@ -12,6 +20,7 @@ test
         this.text = this.urlParams["text"] || "no text"
         this.innerText = this.urlParams["inner-text"] || "no inner-text"
         
+    // sass
     style.
         // importの基底Dirは `/style/`
         @import "color.sass"

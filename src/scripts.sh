@@ -26,7 +26,9 @@ function clean() {
 function resource_copy() {
     rsync -a "$SRC_DIR" "$DIST_DIR/" --exclude "/script/" --exclude "/style/" \
         --exclude "riot.config.js" --exclude "scripts.sh" --exclude "tsconfig.json" \
-        --exclude "webpack.config.babel.js" --exclude "/node_modules/" --exclude "*.pug"
+        --exclude "webpack.config.babel.js" --exclude "webpack.config.babel.js" \
+        --exclude ".babelrc" --exclude "package.json" --exclude "package-lock.json" \
+        --exclude "/node_modules/" --exclude "*.pug"
 }
 
 function module_copy {

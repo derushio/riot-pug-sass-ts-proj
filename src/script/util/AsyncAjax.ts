@@ -17,7 +17,7 @@ export default async function AsyncAjax(type: string, url: string,
             type: type,
             url: url,
             headers: sendHeaders,
-            data: JSON.stringify(data)
+            data: (typeof data == Object.name.toLowerCase())? JSON.stringify(data): data
         }).done((response: string) => {
             resolve(response)
         }).fail((jqXHR, textStatus, MessageThrown) => {

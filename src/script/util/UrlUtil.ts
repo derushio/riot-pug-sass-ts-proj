@@ -1,3 +1,6 @@
+/**
+ * URLのツール群
+ */
 export default class UrlUtil {
     private constructor() {}
 
@@ -19,6 +22,7 @@ export default class UrlUtil {
         return params
     }
 }
+
 export interface UrlParams {
     [key: string]: string
 }

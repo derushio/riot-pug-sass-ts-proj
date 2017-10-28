@@ -4,12 +4,13 @@ inner-test
     script.
         import riot from "riot"
         
-        this.text = opts.text
+        this.text = opts.text || ""
         
     style.
         @import "color.sass"
         
-        $h1-size: 64px
+        $h1-margin: 64px
         h1
             color: $color-main-theme
-            width: calc(?{$h1-size} + 16px)
+            width: calc(100% - ?{$h1-margin} * 2)
+            margin: $h1-margin

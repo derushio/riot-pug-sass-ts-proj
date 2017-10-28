@@ -13,8 +13,5 @@
     },
     "include": [
         "script/**/*.ts"
-    ],
-    "exclude": [
-        "node_modules"
     ]
 }

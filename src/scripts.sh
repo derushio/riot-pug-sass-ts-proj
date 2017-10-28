@@ -129,10 +129,7 @@ function clean_build() {
 }
 
 function build_typedoc() {
-    clean
-    test_build
-    cd "$TMP_DIR"
-    typedoc --name "$PROJ_NAME" --mode "file" --out "../document/typedoc/" "script"
+    typedoc --excludeExternals --externalPattern "**/node_modules/**" --ignoreCompilerErrors --name "$PROJ_NAME" --mode "file" --out "../document/typedoc/" "$SRC_DIR"
 }
 
 $1

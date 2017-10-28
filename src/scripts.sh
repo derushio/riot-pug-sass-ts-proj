@@ -129,7 +129,10 @@ function clean_build() {
 }
 
 function build_typedoc() {
-    typedoc --name "$PROJ_NAME" --mode "file" --out "../document/typedoc" "$SRC_DIR"
+    clean
+    test_build
+    cd "$TMP_DIR"
+    typedoc --name "$PROJ_NAME" --mode "file" --out "../document/typedoc/" "script"
 }
 
 $1

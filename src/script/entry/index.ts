@@ -1,4 +1,7 @@
 import riot from "riot"
 require("../tag/test/test")
 
-riot.mount("*")
+import UrlUtil from "../util/UrlUtil"
+
+// TOPレベルtagにURLパラメーターを渡す
+riot.mount("test", { urlParams: UrlUtil.getParams() })

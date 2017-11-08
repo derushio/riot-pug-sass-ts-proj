@@ -12,7 +12,7 @@ test
          */
         import riot from "riot"
         // innerタグを読み込む
-        require("./inner-test")
+        require("./inner-test"); riot.mount("inner-test")
         
         // optsからurlのパラメータを受け取り
         // textを取り出す

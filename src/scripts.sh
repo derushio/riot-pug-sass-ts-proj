@@ -8,6 +8,8 @@ SRC_DIR="."
 DIST_DIR="$SRC_DIR/../dist"
 TMP_DIR="$SRC_DIR/../tmp"
 
+LF=$'\\\x0A'
+
 function deploy_dirs() {
     [ ! -e "$DIST_DIR" ] && mkdir "$DIST_DIR"
     [ ! -e "$TMP_DIR" ] && mkdir "$TMP_DIR"
@@ -24,11 +26,7 @@ function clean() {
 }
 
 function resource_copy() {
-    rsync -a "$SRC_DIR" "$DIST_DIR/" --exclude "/script/" --exclude "/style/" \
-        --exclude "riot.config.js" --exclude "scripts.sh" --exclude "tsconfig.json" \
-        --exclude "webpack.config.babel.js" --exclude "webpack.config.babel.js" \
-        --exclude ".babelrc" --exclude "package.json" --exclude "package-lock.json" \
-        --exclude "/node_modules/" --exclude "*.pug"
+    rsync -a "$SRC_DIR" "$DIST_DIR/" --exclude "/script/" --exclude "/style/" --exclude "/node_modules/" --exclude "*.pug"
 }
 
 function module_copy {
@@ -65,6 +63,21 @@ function build_riot() {
     riot --config "riot.config.js"
     find "$TMP_DIR/script/" -type f -name "*.js" | \
     while read f; do
+        ## コメントアウトを削除
+        i=1
+        cat $f | grep -e "^/\*\* top-ts ?{.*}? \*/\$" | while read line
+        do
+            ## sed エスケープ
+            repline="${line//\*/\\*}"
+            repline="${repline//\//\\/}"
+            sed -i "" -e "/${repline}/d" "$f"
+
+            ## コメントアウト解除
+            repline="${repline/\\\/\\\*\\\* top-ts ?{/}"
+            repline="${repline/\}? \\\*\\\//}"
+            sed -i "" -e "${i}s/^/${repline} ${LF}/" "$f"
+            let i++
+        done
         mv "$f" "${f%.*}.ts"
     done
 }
@@ -129,7 +142,8 @@ function clean_build() {
 }
 
 function build_typedoc() {
-    typedoc --excludeExternals --externalPattern "**/node_modules/**" --ignoreCompilerErrors --name "$PROJ_NAME" --mode "file" --out "../document/typedoc/" "$SRC_DIR"
+    cd "$SRC_DIR"
+    typedoc --name "$PROJ_NAME" --mode "file" --out "../document/typedoc" "$SRC_DIR"
 }
 
 $1

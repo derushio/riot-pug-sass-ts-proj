@@ -27,7 +27,14 @@ export default {
         js: {
             ts2: (js, opts, url) => {
                 return js
-            }
+            },
+            "top-ts": (js, opts, url) => {
+                return js.split("\n").reduce((prev, line) => {
+                    const nline = /^( *?)((?! ).*)/.exec(line)[2]
+                    if (nline == "") return prev
+                    return prev + "/** top-ts ?{" + nline + "}? */\n"
+                }, "")
+            },
         },
     }
 }

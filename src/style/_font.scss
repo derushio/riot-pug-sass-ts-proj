@@ -1,0 +1,22 @@
+// Sass(SCSS)でフォント読み込むときはmixinを使うべきと悟った話 - Qiita https://qiita.com/Yama-to/items/324a691c7989c4185275
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: otf ttf woff) {
+  $src: null;
+
+  $formats: (
+    otf: 'opentype',
+    ttf: 'truetype',
+    woff: 'woff'
+  );
+
+  @each $ext in $exts {
+    $format: map-get($formats, $ext);
+    $src: append($src, url(quote($path)) format(quote($format)), comma);
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}

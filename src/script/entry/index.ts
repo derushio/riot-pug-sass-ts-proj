@@ -12,9 +12,9 @@ Vue.component("weapon", {
 
 const app = new Vue({
   computed: {
-    seenCategories: function() { return this.selection === "category"; },
-    seenSubWeapons: function() { return this.selection === "subWeapon"; },
-    seenSpecials: function() { return this.selection === "special"; },
+    seenCategories() { return this.selection === "category"; },
+    seenSubWeapons() { return this.selection === "subWeapon"; },
+    seenSpecials() { return this.selection === "special"; },
   },
   data: {
     categories: [
@@ -129,7 +129,7 @@ const app = new Vue({
   },
   el: "#app",
   methods: {
-    randomize: function() {
+    randomize() {
       switch (this.selection) {
         case "weapon":
           this.selectedWeapons = [1 + Math.floor(Math.random() * this.weapons.length)];
@@ -137,20 +137,20 @@ const app = new Vue({
         case "category":
           this.selectedCategory = 1 + Math.floor(Math.random() * this.categories.length);
           this.selectedWeapons = this.weapons
-              .filter((e) => { return e.category === this.categories[this.selectedCategory - 1].name })
-              .map((e) => { return e.id });
+              .filter((e) => e.category === this.categories[this.selectedCategory - 1].name)
+              .map((e) => e.id);
           break;
         case "subWeapon":
           this.selectedSubWeapon = 1 + Math.floor(Math.random() * this.subWeapons.length);
           this.selectedWeapons = this.weapons
-              .filter((e) => { return e.subWeapon === this.subWeapons[this.selectedSubWeapon - 1].name })
-              .map((e) => { return e.id });
+              .filter((e) => e.subWeapon === this.subWeapons[this.selectedSubWeapon - 1].name)
+              .map((e) => e.id);
           break;
         case "special":
           this.selectedSpecial = 1 + Math.floor(Math.random() * this.specials.length);
           this.selectedWeapons = this.weapons
-              .filter((e) => { return e.special === this.specials[this.selectedSpecial - 1].name })
-              .map((e) => { return e.id });
+              .filter((e) => e.special === this.specials[this.selectedSpecial - 1].name)
+              .map((e) => e.id);
           break;
       }
     },

@@ -12,10 +12,17 @@ html
     link(rel="icon" href=favicon type="image/vnd.microsoft.icon")
 
     link(rel="stylesheet" href="style/entry/index.css")
-    script(src="/js/ga.js")
-  body
-    nav.navbar.navbar-expand-md.navbar-dark.bg-dark
-      span.navbar-brand WK＊RAND
+
+    script(async src="https://www.googletagmanager.com/gtag/js?id=UA-253502-30")
+    script
+      | window.dataLayer = window.dataLayer || [];
+      | function gtag(){dataLayer.push(arguments);}
+      | gtag('js', new Date());
+      | gtag('config', 'UA-253502-30');
+
+    body
+      nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+        span.navbar-brand WK＊RAND
 
     main.container.mt-3#app
       form

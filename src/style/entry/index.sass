@@ -1,2 +1,38 @@
-@import "../common.sass"
-@import "../color.sass"
+@import '../font'
+@import '../../node_modules/bootstrap/scss/bootstrap'
+@import '../../node_modules/ionicons/dist/scss/ionicons'
+
+@include font-face('Splatfont', '../fonts/Splatfont2.woff', null, null, woff)
+@include font-face('Paintball', '../fonts/paintball_web.woff', bold, null, woff)
+@include font-face('Ikamodoki', '../fonts/ikamodoki.woff', bold, null, woff)
+
+html,
+body
+  font-family: Paintball, Ikamodoki, Splatfont, 'AXIS Std', 'Helvetica Neue', 'Lucida Grande', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN', Meiryo, メイリオ, sans-serif
+  font-size: 24px
+
+.radio
+  display: none
+
+  + .radio-icon
+    margin-right: .2em
+    position: relative
+    vertical-align: middle
+
+    &::before
+      color: $dark
+      content: '\f360'
+      font-family: 'Ionicons'
+      font-size: 1em
+
+  &:checked
+    + .radio-icon
+      &::before
+        color: $success
+        content: '\f361'
+
+ul
+  list-style-type: none
+
+li
+  margin-left: 1em

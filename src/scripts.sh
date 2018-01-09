@@ -3,9 +3,9 @@
 SUCCESS=0
 FAIL=1
 
-PROJ_NAME="proj"
+PROJ_NAME="wkrand"
 SRC_DIR="."
-DIST_DIR="$SRC_DIR/../dist"
+DIST_DIR="$SRC_DIR/../docs"
 TMP_DIR="$SRC_DIR/../tmp"
 
 LF=$'\\\x0A'
@@ -26,12 +26,23 @@ function clean() {
 }
 
 function resource_copy() {
-    rsync -a "$SRC_DIR" "$DIST_DIR/" --exclude "/script/" --exclude "/style/" --exclude "/node_modules/" --exclude "*.pug"
+    rsync -avh --delete "$SRC_DIR" "$DIST_DIR/" \
+      --exclude "/node_modules/" \
+      --exclude "*.pug" \
+      --exclude "*.sass" \
+      --exclude "*.scss" \
+      --exclude "*.ts" \
+      --exclude ".babelrc" \
+      --exclude "package*.json" \
+      --exclude "riot.config.js" \
+      --exclude "tsconfig.json" \
+      --exclude "webpack.config.babel.js" \
+      --exclude "*.sh"
 }
 
 function module_copy {
     cp "$SRC_DIR/package.json" "$TMP_DIR/package.json"
-    rsync -a "$SRC_DIR/node_modules/" "$TMP_DIR/node_modules"
+    rsync -avh --delete "$SRC_DIR/node_modules/" "$TMP_DIR/node_modules"
 }
 
 function module_install {
@@ -83,7 +94,7 @@ function build_riot() {
 }
 
 function script_copy() {
-    rsync -a "$SRC_DIR/script/" "$TMP_DIR/script/" --exclude "/tag/"
+    rsync -avh --delete "$SRC_DIR/script/" "$TMP_DIR/script/" --exclude "/tag/"
     cp "$SRC_DIR/tsconfig.json" "$TMP_DIR/tsconfig.json"
 }
 
@@ -104,7 +115,7 @@ function build_sass() {
             entryDir="${BASH_REMATCH[1]}"
             entryFile="${BASH_REMATCH[2]}"
             entryName="${BASH_REMATCH[3]}"
-            node-sass "$entry" "$DIST_DIR/$entryDir/$entryName.css"
+            node-sass "$entry" "$DIST_DIR/$entryDir/$entryName.css" --output-style compressed --source-map true
         fi
     done
 }
@@ -139,6 +150,11 @@ function clean_build() {
     script_copy
     exec_webpack
     delete_tmp
+}
+
+function js_build() {
+    script_copy
+    exec_webpack
 }
 
 function build_typedoc() {

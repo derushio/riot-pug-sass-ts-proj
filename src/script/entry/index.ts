@@ -126,6 +126,7 @@ const app = new Vue({
       { id: 63, category: "シェルター", name: "キャンピングシェルター", subWeapon: "ビーコン", special: "バブルランチャー" },
       { id: 64, category: "シェルター", name: "スパイガジェット", subWeapon: "トラップ", special: "スーパーチャクチ" },
       { id: 65, category: "スピナー", name: "ハイドラント", subWeapon: "ロボットボム", special: "スーパーチャクチ" },
+      { id: 66, category: "マニューバー", name: "スパッタリー・ヒュー", subWeapon: "ポイズンミスト", special: "アメフラシ" },
     ],
   },
   el: "#app",

@@ -13,7 +13,8 @@ export default {
   resolve: {
     extensions: ['.ts'],
     alias: {
-      vue: 'vue/dist/vue.js'
+      vue: 'vue/dist/vue.js',
+      axios: 'axios/dist/axios.js'
     }
   },
   module: {

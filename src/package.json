@@ -1,6 +1,6 @@
 {
     "name": "wkrand",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Splatoon2 Randomizer for Work＊",
     "main": "riot.config.js",
     "scripts": {
@@ -13,6 +13,7 @@
     "author": "blueberrystream a.k.a. KID the Eurofia",
     "license": "MIT",
     "dependencies": {
+        "axios": "^0.17.1",
         "bootstrap": "^4.0.0-beta.3",
         "ionicons": "^3.0.0",
         "jquery": "^3.2.1",

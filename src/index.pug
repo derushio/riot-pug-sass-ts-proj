@@ -1,12 +1,64 @@
+- var favicon = "resources/favicon.ico"
+
 doctype html
 html
-    head
-        meta(charset="utf-8")
-        title test
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
 
-        link(rel="stylesheet" href="./style/entry/index.css")
+    title Splatoon2 Randomizer for WORKS＊
+
+    link(rel="shortcut icon" href=favicon type="image/vnd.microsoft.icon")
+    link(rel="icon" href=favicon type="image/vnd.microsoft.icon")
+
+    link(rel="stylesheet" href="style/entry/index.css")
+
+    script(async src="https://www.googletagmanager.com/gtag/js?id=UA-253502-30")
+    script
+      | window.dataLayer = window.dataLayer || [];
+      | function gtag(){dataLayer.push(arguments);}
+      | gtag('js', new Date());
+      | gtag('config', 'UA-253502-30');
+
     body
-        // riot tag
-        test(text="aiueo")
+      nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+        span.navbar-brand WK＊RAND
 
-        script(src="./script/entry/index.js")
+    main.container.mt-3#app
+      form
+        .form-check.pl-0
+          label
+            input.radio(type="radio" name="selection" value="weapon" v-model="selection" checked)
+            span.radio-icon
+            | ブキ
+        .form-check.pl-0
+          label
+            input.radio(type="radio" name="selection" value="category" v-model="selection")
+            span.radio-icon
+            span.text-info カテゴリー
+        .form-check.pl-0
+          label
+            input.radio(type="radio" name="selection" value="subWeapon" v-model="selection")
+            span.radio-icon
+            span.text-success サブ
+        .form-check.pl-0
+          label
+            input.radio(type="radio" name="selection" value="special" v-model="selection")
+            span.radio-icon
+            span.text-danger スペシャル
+        button.btn.btn-primary.w-100#random(type="button" v-on:click="randomize()") ランダム！
+
+      .mt-3 リザルト
+        ul.text-info(v-show="seenCategories") カテゴリー
+          list-item.text-primary(v-for="category in categories" v-bind:item="category" v-bind:key="category.id" v-show="category.id == selectedCategory")
+
+        ul.text-success(v-show="seenSubWeapons") サブ
+          list-item.text-primary(v-for="subWeapon in subWeapons" v-bind:item="subWeapon" v-bind:key="subWeapon.id" v-show="subWeapon.id == selectedSubWeapon")
+
+        ul.text-danger(v-show="seenSpecials") スペシャル
+          list-item.text-primary(v-for="special in specials" v-bind:item="special" v-bind:key="special.id" v-show="special.id == selectedSpecial")
+
+        ul ブキ
+          weapon.text-primary(v-for="weapon in weapons" v-bind:item="weapon" v-bind:key="weapon.id" v-show="selectedWeapons.includes(weapon.id)")
+
+    script(src="script/entry/index.js")

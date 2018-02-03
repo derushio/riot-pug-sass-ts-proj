@@ -1,17 +1,19 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
-        "sourceMap": true,
-        "types": [
-            "node"
-        ],
-        "lib": [
-            "es2017",
-            "dom"
-        ]
-    },
-    "include": [
-        "script/**/*.ts"
+  "compilerOptions": {
+    "module": "es2015",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "target": "es5",
+    "sourceMap": true,
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
     ]
+  },
+  "include": [
+    "script/**/*.ts"
+  ]
 }

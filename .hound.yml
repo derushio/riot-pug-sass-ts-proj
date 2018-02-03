@@ -1,0 +1,6 @@
+tslint:
+  enabled: true
+sass-lint:
+  enabled: true
+jshint:
+  enabled: false

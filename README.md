@@ -1,48 +1,8 @@
-# riot-pug-sass-ts-proj
-riot, pug, sass, tsを一緒に使いたい人向けのテンプレートプロジェクトです
+# wkrand
+Splatoon Randomizer for WORKS＊
 
-## 必要環境
-bash
-node v8.+
+## fork from
+[narumi18wa/riot-pug-sass-ts-proj](https://github.com/narumi18wa/riot-pug-sass-ts-proj)
 
-## インストール方法
-`.bashrc` などの `隠しファイルを含めた` ファイル全てをプロジェクトフォルダにコピー
-以下を実行
-```bash
-./install.sh
-```
-`src/` 以下に作業ディレクトリが作成されます
-
-## ディレクトリ構成
-* `src/` 作業用ディレクトリになります atomなどでこのディレクトリを開いてください
-    * `index.pug` index.htmlに当たるpugファイルです
-    * `webpack.config.babel.js` エントリポイントの記述がありますのでエントリポイント追加時はこちらも編集してください
-    * `script/` スクリプト用ディレクトリです
-        * `entry/` エントリポイントのtsをここに置いてください
-        * `tag/` riotタグファイルをここに置いてください
-    * `style` スタイル用ディレクトリです **riotタグのsass importはここがルートになります**
-        * `entry` エントリポイントのsassをここに置いてください
-* `tmp` ビルド時の中間ファイルはここに置かれます プロジェクト内ファイル削除後は余計なファイルが入るので、一度npm run cleanしてください。
-* `dist` ビルド後のファイルがここに収められます
-
-## ビルド方法
-テスト時などの連続した高速ビルド
-以下を `src/` で実行
-```bash
-npm run build
-```
-
-ファイル削除など、構成が変わった後にビルドがうまくいかない場合
-以下を `src/` で実行
-```bash
-npm run clean
-```
-
-サーバーアップロード時の確実なビルドをしたい場合
-以下を `src/` で実行
-```bash
-npm run clean_build
-```
-
-## 制限事項
-riot tag sass内のcalc内変数は `#{$hoge}` ではなく `?{$hoge}` での記述をお願いします
+## License
+The MIT License [https://blueberrystream.mit-license.org/](https://blueberrystream.mit-license.org/)

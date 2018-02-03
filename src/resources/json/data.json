@@ -67,7 +67,8 @@
     { "id": 65, "category": "スピナー", "name": "ハイドラント", "subWeapon": "ロボットボム", "special": "スーパーチャクチ" },
     { "id": 66, "category": "マニューバー", "name": "スパッタリー・ヒュー", "subWeapon": "ポイズンミスト", "special": "アメフラシ" },
     { "id": 67, "category": "シューター", "name": ".52ガロンデコ", "subWeapon": "カーリングボム", "special": "ハイパープレッサー" },
-    { "id": 68, "category": "ブラスター", "name": "ラピッドブラスターデコ", "subWeapon": "キューバンボム", "special": "ジェットパック" }
+    { "id": 68, "category": "ブラスター", "name": "ラピッドブラスターデコ", "subWeapon": "キューバンボム", "special": "ジェットパック" },
+    { "id": 69, "category": "シューター", "name": ".96ガロンデコ", "subWeapon": "スプラッシュシールド", "special": "スーパーチャクチ" }
   ],
   "subWeapons": [
     { "id": 1, "name": "スプラッシュボム" },
